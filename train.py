@@ -82,6 +82,32 @@ parser.add_argument('--max_len', type=int, default=15)
 parser.add_argument('--rnn_type', default='lstm',
                     help='supported types: rnn, gru, lstm')
 
+# train / test parameters
+parser.add_argument('--batch_size', type=int, default=60)
+parser.add_argument('--epochs', type=int, default=12)
+parser.add_argument('--init_lr', type=float, default=0.5)
+parser.add_argument('--do_p', type=float, default=0.8)
+parser.add_argument('--wd', type=float, default=0.)
+parser.add_argument('--d_hidden', type=int, default=100)
+parser.add_argument('--d_embed', type=int, default=300)
+parser.add_argument('--d_char_embed', type=int, default=8)
+parser.add_argument('--d_char_out', type=int, default=100)
+parser.add_argument('--d_out_chan', type=str, default="100")
+parser.add_argument('--d_char_filter', type=str, default="5")
+
+#Advanced training options
+parser.add_argument('--preserve-case', action='store_false', dest='lower')
+parser.add_argument('--logit_func', type=str, default="tri_linear")
+parser.add_argument('--answer_func', type=str, default="linear")
+parser.add_argument('--n_hway_layers', type=int, default=2)
+
+parser.add_argument('--n_layers', type=int, default=1)
+parser.add_argument('--log_every', type=int, default=50)
+parser.add_argument('--dev_every', type=int, default=1000)
+parser.add_argument('--save_every', type=int, default=1000)
+parser.add_argument('--train_embed', action='store_false', dest='fix_emb')
+parser.add_argument('--gpu', type=int, default=0)
+
 args = parser.parse_args()
 
 # set model dir
@@ -107,7 +133,6 @@ fh.setFormatter(formatter)
 ch.setFormatter(formatter)
 log.addHandler(fh)
 log.addHandler(ch)
-
 
 def main():
     log.info('[program starts.]')

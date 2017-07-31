@@ -1,4 +1,4 @@
-BiDAF in Pytorch
+BiDAF in Pytorch (work in progress)
 ---
 
 ## Requirements
